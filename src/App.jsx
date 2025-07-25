@@ -4,10 +4,10 @@ import { Footer } from './components/Footer'
 import ProductGrid from './components/ProductGrid'
 
 const products = [
-  {id: 1, title: 'Smart Phone', price:666},
-  {id: 2, title: 'Computer', price:333},
-  {id: 3, title: 'Camera', price:999},
-  {id: 4, title: 'Watch', price:369},
+  {id: 1, title: 'Smart Phone', price:666, url:''},
+  {id: 2, title: 'Computer', price:333, url:''},
+  {id: 3, title: 'Camera', price:999, url:''},
+  {id: 4, title: 'Watch', price:369, url:''},
 ]
 
 function App() {
