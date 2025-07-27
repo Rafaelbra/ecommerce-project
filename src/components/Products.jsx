@@ -1,6 +1,7 @@
 import ProductGrid from './ProductGrid'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
+import Filters from './Filters';
 
 
 
@@ -25,9 +26,11 @@ const Products = () => {
     if (error) return <div>Error when fetching the products</div>
 
   return (
-    <section className='flex-grow p-4'>
-        <ProductGrid products={data}/>   
-    </section>
+    <main className='flex-grow flex bg-gray-100'>
+        <Filters onFilter={() => {}}/>
+        <ProductGrid products={data}/> 
+    </main>
+    
   )
 };
 

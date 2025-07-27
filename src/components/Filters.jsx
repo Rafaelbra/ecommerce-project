@@ -1,7 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import PropTypes from 'prop-types'
 
+const fetchCategories = async () => {
+    try {
+        const { data } = await axios.get('https://fakestoreapi.com/products/categories');
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const Filters = ({onFilter}) => {
+    const {data, error, isLoading} = useQuery({
+    queryKey:['categories'],
+    queryFn: fetchCategories,
+});
+// console.log({data, error, isLoading})
+
     return(
         <aside className='w-1/4 p-4 bg-white pb-4'>
             <h2 className='text-lg font-semibold    mb-4'>Filters</h2>
