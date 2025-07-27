@@ -3,7 +3,9 @@ import Header from './components/Header'
 import { Footer } from './components/Footer'
 import Filters from './components/Filters'
 import Products from './components/Products'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
 
 function App() {
 
@@ -22,8 +24,9 @@ function App() {
 
       <main className='flex-grow flex bg-gray-100'>
         <Filters onFilter={handleFilter}/>
-
+        <QueryClientProvider client={queryClient}>
         <Products />
+        </QueryClientProvider>
       </main>
 
       <Footer />
