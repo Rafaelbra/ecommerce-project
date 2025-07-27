@@ -1,21 +1,19 @@
 import './App.css'
 import Header from './components/Header'
 import { Footer } from './components/Footer'
-import ProductGrid from './components/ProductGrid'
-import { useState } from 'react'
 import Filters from './components/Filters'
 import Products from './components/Products'
 
 
 function App() {
-  const [filteredProducts, setFilteredProducts] = useState()
+
 
   const handleFilter = (filterType) => {
     if (filterType === 'under500') {
-      setFilteredProducts(products.filter(product => product.price < 500))
-    } else {
-      setFilteredProducts(products)
-    }
+    //   setFilteredProducts(products.filter(product => product.price < 500))
+    // } else {
+    //   setFilteredProducts(products)
+    // }
   };
 
   return (
