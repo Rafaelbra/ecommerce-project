@@ -10,10 +10,10 @@ function App() {
 
   const handleFilter = (filterType) => {
     if (filterType === 'under500') {
-    //   setFilteredProducts(products.filter(product => product.price < 500))
-    // } else {
-    //   setFilteredProducts(products)
-    // }
+      setFilteredProducts(products.filter(product => product.price < 500))
+    } else {
+      setFilteredProducts(products)
+    }
   };
 
   return (

@@ -1,32 +1,33 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import ProductGrid from './ProductGrid'
+import { lazy, Suspense, use } from 'react'
 import axios from 'axios'
 
+
+
+const fetchProducts = async () => {
+    try {
+        const { data } = await axios.get('https://fakestoreapi.com/products');
+    return data;
+    } catch (error) {
+        alert('Error fetching products');
+        console.log(error);
+    }
+}
+
+const productPromise = fetchProducts();
+
 const Products = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const products = use(productPromise)
 
-    useEffect(() => {
-        async function fetchProduct () {
-            try {
-                const response = await axios.get('https://fakestoreapi.com/products')
-                setProducts(response.data);
-            } catch(error) {
-                alert('Error fetching products')
-                console.log(alert)
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchProduct();
-    }, []);
-
-    if (loading) return <div>Loading products...</div>;
-
+    const ProductGrid = lazy(() => 
+    new Promise(resolve => setTimeout(() => resolve(import('./ProductGrid')), 100)) // simulating delay
+);
+   
   return (
     <section className='flex-grow p-4'>
-        <ProductGrid products={products}/>
+        <Suspense fallback={<div>Loading products...</div>}>
+            <ProductGrid products={products}/>
+        </Suspense>
+        
     </section>
   )
 }
