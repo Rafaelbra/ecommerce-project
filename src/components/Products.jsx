@@ -1,27 +1,8 @@
 import ProductGrid from './ProductGrid'
-import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
 import Filters from './Filters';
 import { useState } from 'react';
-
-
-
-const fetchProducts = async ({ queryKey }) => {
-    const [key, filters] = queryKey
-    let url = 'https://fakestoreapi.com/products'
-    if (filters.category) {
-        url += `/category/${filters.category}`
-    }
-    if (filters.sort) {
-        url += `?sort=${filters.sort}`
-    }
-    try {
-        const { data } = await axios.get(url);
-    return data;
-    } catch (error) {
-        console.log(error);
-    }
-};
+import { productService } from '../services/ProductService';
 
 
 const Products = () => {
@@ -32,7 +13,7 @@ const Products = () => {
 
     const {data, error, isLoading} = useQuery({
         queryKey:['products', filters],
-        queryFn: fetchProducts,
+        queryFn: () => productService.getProducts(filters),
     });
 
     if (isLoading) return <div>Loading products...</div>
