@@ -1,8 +1,7 @@
 import ProductGrid from './ProductGrid'
-import { useQuery } from '@tanstack/react-query';
 import Filters from './Filters';
 import { useState } from 'react';
-import { productService } from '../services/ProductService';
+import { useProducts } from '../hooks/useProducts';
 
 
 const Products = () => {
@@ -11,10 +10,7 @@ const Products = () => {
         sort: 'asc',
     });
 
-    const {data, error, isLoading} = useQuery({
-        queryKey:['products', filters],
-        queryFn: () => productService.getProducts(filters),
-    });
+    const {data, error, isLoading} = useProducts(filters)
 
     if (isLoading) return <div>Loading products...</div>
     if (error) return <div>Error when fetching the products</div>

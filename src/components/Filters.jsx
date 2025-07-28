@@ -1,13 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import PropTypes from 'prop-types'
-import { productService } from '../services/ProductService';
+import { useCategories } from '../hooks/useCategories';
 
 
 const Filters = ({ filters, onFilter }) => {
-    const {data, error, isLoading} = useQuery({
-    queryKey:['categories'],
-    queryFn: () => productService.getCategories(),
-});
+    const {data, error, isLoading} = useCategories()
 
 if (isLoading) return <aside className="w-1/4 p-4 bg-white">Loading categories...</aside>;
 if (error) return <aside className="w-1/4 p-4 bg-white">Failed to load categories</aside>;
