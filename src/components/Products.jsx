@@ -12,13 +12,12 @@ const Products = () => {
 
     const {data, error, isLoading} = useProducts(filters)
 
-    if (isLoading) return <div>Loading products...</div>
     if (error) return <div>Error when fetching the products</div>
 
   return (
     <main className='flex-grow flex bg-gray-100'>
         <Filters filters={filters} onFilter={setFilters}/>
-        <ProductGrid products={data}/> 
+        <ProductGrid products={data} loading={isLoading}/> 
     </main>
   )
 };
