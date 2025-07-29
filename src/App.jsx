@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Outlet, Route, Routes } from 'react-router'
 import Checkout from './pages/CheckOut'
 import Product from './pages/Product'
+import NotFound from './pages/NotFound'
 
 const queryClient = new QueryClient();
 
@@ -26,9 +27,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route element={<Layout/>}>
-          <Route path='/' element={<Products />} />
+          <Route index element={<Products />} />
           <Route path='/products/:id' element={<Product />} />
-          <Route path='/checkout' element={<Checkout/>} />
+          <Route path='/checkout' element={<Checkout />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </QueryClientProvider>

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router';
 import { useProduct } from '../hooks/useProduct';
+import NotFound from './notFound';
 
 export default function Product() {
   const { id } = useParams();
@@ -7,6 +8,9 @@ export default function Product() {
 
   if (isLoading) return <div>Loading product details...</div>;
   if (error) return <div>Error while fetching the product</div>;
+  if (!data) {
+    return <NotFound />;
+  }
 
   return (
     <div className='p-8 max-w-4xl mx-auto'>
@@ -32,7 +36,7 @@ export default function Product() {
                 <svg
                   key={i}
                   className={`w-5 h-5 ${
-                    i < Math.round(data.rating.rate)
+                    i < Math.round(data.rating.rate || 0)
                       ? 'fill-current'
                       : 'fill-none'
                   }`}
