@@ -1,9 +1,10 @@
 import './App.css'
 import Header from './components/Header'
 import { Footer } from './components/Footer'
-import Products from './components/Products'
+import Products from './pages/Products'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Outlet, Route, Routes } from 'react-router'
+import Checkout from './pages/CheckOut'
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
           <Route path='/' element={<Products />} />
+          <Route path='/checkout' element={<Checkout/>} />
         </Route>
       </Routes>
     </QueryClientProvider>
