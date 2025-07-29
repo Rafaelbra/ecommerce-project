@@ -1,15 +1,22 @@
 import { useParams } from 'react-router';
 import { useProduct } from '../hooks/useProduct';
 import NotFound from './notFound';
+import { use } from 'react';
+import { CartContext } from '../context/CartContext';
 
 export default function Product() {
   const { id } = useParams();
   const { data, isLoading, error } = useProduct(id);
+  const {addItem} = use(CartContext);
 
   if (isLoading) return <div>Loading product details...</div>;
   if (error) return <div>Error while fetching the product</div>;
   if (!data) {
     return <NotFound />;
+  }
+
+  const handleAddToCart = () => {
+    addItem(data);
   }
 
   return (
@@ -55,7 +62,7 @@ export default function Product() {
             <p className='text-3xl font-bold text-blue-600 mb-8'>
               ${data.price}
             </p>
-            <button className='w-full bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors text-lg'>
+            <button onClick={handleAddToCart} className='w-full bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors text-lg'>
               Add to Cart
             </button>
           </div>
