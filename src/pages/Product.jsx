@@ -1,13 +1,38 @@
 import { useParams } from 'react-router';
 import { useProduct } from '../hooks/useProduct';
 import NotFound from './notFound';
-import { use } from 'react';
+import { use, useState } from 'react';
 import { CartContext } from '../context/CartContext';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+
+const fadeIn = keyframes `
+  from {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+`
+
+const NotificationWrapper = styled.div`
+  animation: ${fadeIn} 0.5s ease-out;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color:#10b981;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+`
 
 export default function Product() {
   const { id } = useParams();
   const { data, isLoading, error } = useProduct(id);
   const {addItem} = use(CartContext);
+  const [showNotification, setShowNotification] = useState(false);
 
   if (isLoading) return <div>Loading product details...</div>;
   if (error) return <div>Error while fetching the product</div>;
@@ -17,10 +42,13 @@ export default function Product() {
 
   const handleAddToCart = () => {
     addItem(data);
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 2000)
   }
 
   return (
     <div className='p-8 max-w-4xl mx-auto'>
+      {showNotification && <NotificationWrapper>Item added to the cart</NotificationWrapper>}
       <div className='grid md:grid-cols-2 gap-8 min-h-[70vh]'>
         <div className='flex flex-col justify-center'>
           <img
@@ -58,7 +86,7 @@ export default function Product() {
               ({data.rating.count} reviews)
             </span>
           </div>
-          <div className='mt-auto'>
+          <div>
             <p className='text-3xl font-bold text-blue-600 mb-8'>
               ${data.price}
             </p>
