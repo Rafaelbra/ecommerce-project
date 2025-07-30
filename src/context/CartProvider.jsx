@@ -22,8 +22,23 @@ export function Cartprovider({children}) {
         });
     }
 
+    const removeItem = (productId) => {
+        setItems((currentItems) => 
+            currentItems.filter(item => item.id != productId)
+    );
+    };
+
+    const updateQuantity = (productId, quantity) => {
+        setItems((currentItems) => 
+            currentItems.map((item) =>
+            item.id === productId 
+            ? {...item, quantity: Math.max(0, quantity)} 
+            : item
+        )) .filter(item => item.quantity > 0)
+    }
+
     return (
-        <CartContext.Provider value={{items, addItem}}>
+        <CartContext.Provider value={{items, addItem, removeItem, updateQuantity}}>
             {children}
         </CartContext.Provider>
     )
