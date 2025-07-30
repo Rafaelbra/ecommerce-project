@@ -7,7 +7,7 @@ const Header = () => {
         <NavLink to='/' className='hover:opacity-80 transition-opacity'>
           <h1 className='text-lg font-bold'>SpacEcommerce</h1>
         </NavLink>
-        <NavLink to='/checkout' className='p-2 hover:bg-blue-700 transition-colors rounded-full'>
+        <NavLink to='/cart' className='p-2 hover:bg-blue-700 transition-colors rounded-full'>
         <img src={checkoutImage} alt='Checkout' className="h-6 w-6 invert"></img></NavLink>
     </header>
   )
