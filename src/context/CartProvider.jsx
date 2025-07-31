@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import PropTypes from "prop-types";
 
 export function Cartprovider({children}) {
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState(() => {
+        const savedCart = localStorage.getItem('cart')
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(items));
+    }, [items]);
 
     const addItem = (product) => {
         setItems((currentItems) => {
