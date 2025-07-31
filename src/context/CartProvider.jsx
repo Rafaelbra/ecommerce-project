@@ -37,8 +37,19 @@ export function Cartprovider({children}) {
         )) .filter(item => item.quantity > 0)
     }
 
+    let cartCount = 0;
+    for ( const item of items ) {
+        cartCount = cartCount + item.quantity;
+    }
+
+    let cartTotal = 0;
+    for ( const item of items ) {
+        const itemTotal = item.price * item.quantity;
+        cartTotal = cartTotal + itemTotal;
+    }
+
     return (
-        <CartContext.Provider value={{items, addItem, removeItem, updateQuantity}}>
+        <CartContext.Provider value={{items, addItem, removeItem, updateQuantity, cartCount, cartTotal}}>
             {children}
         </CartContext.Provider>
     )

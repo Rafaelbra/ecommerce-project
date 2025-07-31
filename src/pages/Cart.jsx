@@ -3,7 +3,7 @@ import { CartContext } from "../context/CartContext"
 import { Link } from "react-router";
 
 export default function Cart() {
-    const {items, removeItem, updateQuantity} = use(CartContext)
+    const {items, removeItem, updateQuantity, cartTotal} = use(CartContext)
     return <div className="p-8 max-w-4xl mx-auto ">
         <h1 className="text-2xl font-bold mb-6">Shopping cart</h1>
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -30,6 +30,10 @@ export default function Cart() {
                 ))}
             </div>
                 <div className="p-6 bg-gray-50">
+                    <div className="flex justify-between items-center mb-6">
+                        <span className="text-lg font-semibold ">Total: </span>
+                        <span className="text-2xl font-bold ">${cartTotal.toFixed(2)}</span>
+                    </div>
                     <div className="flex justify-end">
                         <Link to='/checkout' className='bg-blue-600 text-white px-8 py-3 rounded-lg hover: bg-blue-700 transition'>
                         Proceed to checkout
