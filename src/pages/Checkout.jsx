@@ -19,7 +19,7 @@ export default function Checkout() {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
-        <h1 className='text-2xl font-bold mb-6'>Checkout</h1>
+        <h1 className='text-2xl font-bold mb-6 text-'>Checkout</h1>
         <div className="grid md:grid-cols-2 gap-8">
           <CheckoutForm onSubmit={handleCheckout} />
           <CartSummary items={items} cartTotal={cartTotal} />
