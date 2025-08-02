@@ -1,5 +1,7 @@
 import { use } from "react"
 import { CartContext } from "../context/CartContext"
+import CartSummary from "../components/CartSummary";
+import CheckoutForm from "../components/CheckoutForm";
 
 export default function Checkout() {
   const {items, cartTotal} = use(CartContext);

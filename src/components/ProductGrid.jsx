@@ -37,10 +37,15 @@ ProductGrid.propTypes = {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      url: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      rating: PropTypes.shape({
+        rate: PropTypes.number.isRequired,
+        count: PropTypes.number.isRequired,
+      }),
     })
   ).isRequired,
-  loading: PropTypes.bool 
+  loading: PropTypes.bool ,
 };
 
 export default ProductGrid
