@@ -1,8 +1,11 @@
 import PropTypes from "prop-types"
+import { useFormStatus } from "react-dom"
 
 function CheckoutForm({onSubmit}) {
+    const {pending} = useFormStatus()
+
   return (
-    <form className="space-y-4 text-left">
+    <form action={onSubmit} className="space-y-4 text-left">
         <div>
             <label 
             htmlFor="name" 
@@ -82,8 +85,8 @@ function CheckoutForm({onSubmit}) {
             </div>    
         </div>
 
-        <button type='submit' className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-            Place Order
+        <button type='submit' className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-400" disabled={pending}>
+            {pending ? 'Processing order...' : 'Place Order'}
         </button>
     </form>
   )

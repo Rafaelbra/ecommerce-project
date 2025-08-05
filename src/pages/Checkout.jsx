@@ -2,9 +2,11 @@ import { use } from "react"
 import { CartContext } from "../context/CartContext"
 import CartSummary from "../components/CartSummary";
 import CheckoutForm from "../components/CheckoutForm";
+import { useCheckout } from "../hooks/useCheckout";
 
 export default function Checkout() {
   const {items, cartTotal} = use(CartContext);
+  const {mutateAsync : submitCheckout} = useCheckout();
 
   if (items.length === 0) return (
     <div className='p-8 max-w-4xl mx-auto'>
@@ -15,7 +17,27 @@ export default function Checkout() {
     </div>
   );
 
-  function handleCheckout () {}
+  async function handleCheckout (formData) {
+    try {
+      const orderData = {
+      userId: 1,
+      date: new Date().toISOString(),
+      products: items,
+      customer: {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        address: formData.get('address'),
+        city: formData.get('city'),
+        zipCode: formData.get('zipCode'),
+      },
+    };
+    await submitCheckout(orderData)
+    } catch (error) {
+      console.log(`Checkout failed: ${error}`)
+      alert('Failed to process the checkout')
+    }
+
+  }
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
