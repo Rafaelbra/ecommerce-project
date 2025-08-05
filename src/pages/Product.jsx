@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { useProduct } from '../hooks/useProduct';
-import NotFound from './notFound';
+import NotFound from './NotFound';
 import { use, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import styled from '@emotion/styled';
