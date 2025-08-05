@@ -14,7 +14,7 @@ const CartSummary = ({items, cartTotal}) => {
             <div className="border-t pt-2">
                 <div className="flex justify-between font-semibold">
                     <span>Total</span>
-                    <span>${cartTotal}</span>
+                    <span>${cartTotal.toFixed(2)}</span>
                 </div>
             </div>
         </div>
