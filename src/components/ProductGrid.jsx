@@ -1,6 +1,16 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router';
 
+const fixImageUrl = (url) => {
+  // If URL ends with .jpg → change to .png
+  let fixed = url.replace(".jpg", ".png");
+
+  // If it ends with "_." before .png, insert "t"
+  fixed = fixed.replace("_.png", "_t.png");
+
+  return fixed;
+};
+
 
 function SkeletonProductGrid() {
   return (
@@ -24,7 +34,7 @@ const ProductGrid = ({ products, loading }) => {
       {products.map((product) => 
       <Link key={product.id} to={`/products/${product.id}`} className='p-4 bg-white rounded shadow hover:shadow-lg tran-shadow'>
           <img 
-          src={product.image} 
+          src={fixImageUrl(product.image)} 
           alt={product.title} 
           className='h-40 mx-auto mb-4 object-contain'
           />
